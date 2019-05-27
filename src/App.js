@@ -16,7 +16,18 @@ export default props => {
       <Route
         path="/stepform"
         exact
-        render={() => <StepForm fields={fields} />}
+        render={() => (
+          <StepForm
+            fields={fields}
+            primaryColor="darkblue"
+            scrollBottom={() => {
+              window.scrollTo(0, document.body.scrollHeight);
+            }}
+            sendTextMessage={message => {
+              alert(JSON.stringify(message));
+            }}
+          />
+        )}
       />
     </Router>
   );

@@ -402,6 +402,7 @@ class StepForm extends Component {
   };
 
   render() {
+    const fieldsLength = this.props.fields.length;
     return (
       <div className="pk-step-form-container">
         <div
@@ -420,8 +421,7 @@ class StepForm extends Component {
               height: 5,
               width: this.state.sent
                 ? "100%"
-                : `calc(100% / ${this.props.fields.length} * ${this.state
-                    .shown - 1})`,
+                : `calc(100% / ${fieldsLength} * ${this.state.shown - 1})`,
               transition: "width 0.2s ease-in-out",
             }}
           />
@@ -431,7 +431,8 @@ class StepForm extends Component {
               fontSize: "14px",
             }}
           >
-            ( {this.state.shown} / {this.props.fields.length} )
+            ( {this.state.shown} / {fieldsLength} )
+            {console.log(this.state.shown, fieldsLength)}
           </div>
           {(this.props.step
             ? this.props.fields.slice(0, this.state.shown)
