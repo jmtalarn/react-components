@@ -9,7 +9,7 @@ const fields = stepformContent.attachment.payload.fields;
 
 export default props => {
   return (
-    <Router>
+    <Router basename="/react-components">
       <Nav />
 
       <Route path="/" exact component={Home} />
