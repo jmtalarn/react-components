@@ -1,0 +1,201 @@
+.pk-step-form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Select-menu-outer {
+    z-index: 999 !important;
+}
+.pk-step-form-card {
+    width: 90%;
+    background-color: white;
+    box-shadow: 0 0 6px 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    padding: 20px 20px 10px 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.pk-step-form-input {
+    padding: 10px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    box-sizing: border-box;
+    height: 40px;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4) !important;
+    width: calc(100% - 40px);
+    margin-bottom: 10px;
+    vertical-align: top;
+    font-family: "Muli", sans-serif !important;
+    font-size: 15px;
+}
+
+.hyperlink {
+    color: #1787fb;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.pk-step-form-input:focus {
+    outline: none;
+}
+
+.pk-step-form-field input[type=text],
+.pk-step-form-field input[type=email],
+.pk-step-form-field input[type=number] {
+    height: 40px;
+    border: none;
+}
+
+.pk-step-form-error {
+    outline: none;
+    box-shadow: inset 0 0 6px rgba(233, 12, 12, 0.8) !important;
+}
+
+.pk-step-form-button {
+    background-color: darkblue;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 0 4px 4px 0;
+    padding: 0 10px;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    box-sizing: border-box;
+    vertical-align: top;
+    margin-left: -1px;
+}
+
+.pk-step-form-button {
+    outline: none;
+}
+
+.pk-step-form-sent input,
+.pk-step-form-sent textarea {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.pk-step-form-check .pk-step-form-button-bar:nth-child(1) {
+    background-color: white;
+    height: 3px;
+    width: 7px;
+    transform: rotate(45deg) translate(5px, 3px);
+    transition: all 0.5s ease;
+}
+
+.pk-step-form-check .pk-step-form-button-bar:nth-child(2) {
+    background-color: white;
+    height: 3px;
+    width: 19px;
+    transform: rotate(-225deg) translate(-3px, -3px);
+    transition: all 0.5s ease;
+}
+
+.pk-step-form-chevron .pk-step-form-button-bar:nth-child(1) {
+    background-color: white;
+    height: 3px;
+    width: 12px;
+    transform: translate(5px, 5px) rotate(-45deg);
+    transition: all 0.5s ease;
+}
+
+.pk-step-form-chevron .pk-step-form-button-bar:nth-child(2) {
+    background-color: white;
+    height: 3px;
+    width: 12px;
+    transform: translate(5px, -5px) rotate(45deg);
+    transition: all 0.5s ease;
+}
+
+.pk-step-form-cross .pk-step-form-button-bar:nth-child(1) {
+    background-color: white;
+    height: 3px;
+    width: 24px;
+    transform: translate(0px, 1px) rotate(-45deg);
+    transition: all 0.5s ease;
+}
+
+.pk-step-form-cross .pk-step-form-button-bar:nth-child(2) {
+    background-color: white;
+    height: 3px;
+    width: 24px;
+    transform: translate(0px, -1px) rotate(45deg);
+    transition: all 0.5s ease;
+}
+
+.pk-step-form-field {
+    width: 100%;
+    display: flex;
+}
+
+.pk-step-form-date-container {
+    display: flex;
+    width: calc(100% - 40px);
+}
+
+.pk-step-form-date {
+    width: 30%;
+}
+
+.pk-step-form-date {
+    margin-right: auto;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.pk-step-form-textarea,
+.pk-step-form-textarea-button {
+    height: 80px;
+    font-family: "Muli", sans-serif !important;
+}
+
+.pk-step-form-textarea::-webkit-scrollbar {
+    width: 6px;
+}
+
+.pk-step-form-textarea::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.pk-step-form-textarea::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.pk-step-form-date-seperator {
+    height: 40px;
+    padding: 10px;
+    font-size: 30px;
+    color: #666;
+    font-weight: lighter;
+    box-sizing: border-box;
+}
+
+.pk-step-form-field-title {
+    width: 100%;
+    font-size: 10px;
+    padding: 0 0 5px 0;
+}
+
+.pk-step-form-select {
+    overflow: hidden;
+}
+
+.pk-step-form-country-menu
+{
+    position: absolute;
+    top: 10px;
+}
+
+@media only screen and (max-width: 400px) {
+    .pk-step-form-date-seperator {
+        display: none;
+    }
+    .pk-step-form-date {
+        font-size: 10px;
+    }
+}

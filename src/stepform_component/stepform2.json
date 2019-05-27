@@ -1,0 +1,40 @@
+{
+  "attachment": {
+    "payload": {
+      "template_type": "step_form_2",
+      "fields": [
+        {
+          "placeholder": "Patient's Name",
+          "required": true,
+          "disabled": false,
+          "key": "patient_name",
+          "type": "text"
+        },
+        {
+          "country": "SG",
+          "required": true,
+          "disabled": false,
+          "placeholder": "Contact Number",
+          "key": "mobile_number",
+          "type": "contact_num"
+        },
+        {
+          "type": "email",
+          "required": true,
+          "disabled": false,
+          "key": "email_Id",
+          "validation": "email",
+          "placeholder": "Email ID"
+        },
+        {
+          "placeholder": "Enquiry Description",
+          "required": true,
+          "value": "",
+          "disabled": false,
+          "key": "enquiry_description",
+          "type": "longtext"
+        }
+      ]
+    }
+  }
+}
