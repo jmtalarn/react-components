@@ -20,6 +20,7 @@ export default props => {
           <StepForm
             fields={fields}
             primaryColor="darkblue"
+            step={true}
             scrollBottom={() => {
               window.scrollTo(0, document.body.scrollHeight);
             }}

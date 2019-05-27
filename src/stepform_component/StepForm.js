@@ -402,7 +402,7 @@ class StepForm extends Component {
   };
 
   render() {
-    const fieldsLength = this.props.fields.length;
+    const fields = this.props.fields;
     return (
       <div className="pk-step-form-container">
         <div
@@ -421,7 +421,7 @@ class StepForm extends Component {
               height: 5,
               width: this.state.sent
                 ? "100%"
-                : `calc(100% / ${fieldsLength} * ${this.state.shown - 1})`,
+                : `calc(100% / ${fields.length} * ${this.state.shown - 1})`,
               transition: "width 0.2s ease-in-out",
             }}
           />
@@ -431,38 +431,20 @@ class StepForm extends Component {
               fontSize: "14px",
             }}
           >
-            ( {this.state.shown} / {fieldsLength} )
-            {console.log(this.state.shown, fieldsLength)}
+            ( {this.state.shown} / {fields.length} )
           </div>
-          {(this.props.step
-            ? this.props.fields.slice(0, this.state.shown)
-            : this.props.fields
-          ).map(field => (
-            <Fragment>
-              {["dob"].includes(field.type) && (
-                <div className="pk-step-form-field-title">
-                  {field.placeholder}
-                </div>
-              )}
-              <div className="pk-step-form-field">
-                {field.type === "email" ? (
-                  <input
-                    autoFocus={true}
-                    className={`pk-step-form-input ${this.state.showCross[
-                      field.key
-                    ] && "pk-step-form-error"}`}
-                    name={field.key}
-                    value={this.state.fields[field.key]}
-                    onChange={this.handleChange}
-                    onKeyPress={this.handleKeyPress}
-                    type="text"
-                    placeholder={field.placeholder}
-                  />
-                ) : field.type === "text" ? (
-                  <div style={{ width: "100%" }}>
+          {(this.props.step ? fields.slice(0, this.state.shown) : fields).map(
+            field => (
+              <Fragment>
+                {["dob"].includes(field.type) && (
+                  <div className="pk-step-form-field-title">
+                    {field.placeholder}
+                  </div>
+                )}
+                <div className="pk-step-form-field">
+                  {field.type === "email" ? (
                     <input
                       autoFocus={true}
-                      style={{ width: "100%" }}
                       className={`pk-step-form-input ${this.state.showCross[
                         field.key
                       ] && "pk-step-form-error"}`}
@@ -473,65 +455,80 @@ class StepForm extends Component {
                       type="text"
                       placeholder={field.placeholder}
                     />
-                    {["patient_name", "patientName"].includes(field.key) &&
-                      this.state.showCross[field.key] && (
-                        <div style={{ marginTop: "-7px" }}>
-                          <small style={{ color: "red" }}>
-                            Enter full name
-                          </small>
-                        </div>
-                      )}
-                  </div>
-                ) : field.type === "dob" ? (
-                  <div className="pk-step-form-date-container">
-                    <input
-                      autoComplete={false}
-                      autoFocus={true}
-                      className={`pk-step-form-input pk-step-form-date ${this
-                        .state.showCross[field.key] && "pk-step-form-error"}`}
-                      name={field.key}
-                      value={this.state.custom.dob.date}
-                      onChange={this.handleChange}
-                      onKeyPress={this.handleKeyPress}
-                      type="text"
-                      placeholder={"DD"}
-                    />{" "}
-                    <span className="pk-step-form-date-seperator">/</span>
-                    <input
-                      autoComplete={false}
-                      className={`pk-step-form-input pk-step-form-date ${this
-                        .state.showCross[field.key] && "pk-step-form-error"}`}
-                      name={field.key}
-                      value={this.state.custom.dob.month}
-                      onChange={this.handleChange}
-                      onKeyPress={this.handleKeyPress}
-                      type="text"
-                      placeholder={"MM"}
-                    />{" "}
-                    <span className="pk-step-form-date-seperator">/</span>
-                    <input
-                      autoComplete={false}
-                      className={`pk-step-form-input pk-step-form-date ${this
-                        .state.showCross[field.key] && "pk-step-form-error"}`}
-                      name={field.key}
-                      value={this.state.custom.dob.year}
-                      onChange={this.handleChange}
-                      onKeyPress={this.handleKeyPress}
-                      type="text"
-                      placeholder={"YYYY"}
-                    />{" "}
-                    <span className="pk-step-form-date-seperator" />
-                  </div>
-                ) : field.type === "contact_num" ? (
-                  <div
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      paddingTop: "5px",
-                    }}
-                    className="pk-step-form-input"
-                  >
-                    {/* <div
+                  ) : field.type === "text" ? (
+                    <div style={{ width: "100%" }}>
+                      <input
+                        autoFocus={true}
+                        style={{ width: "100%" }}
+                        className={`pk-step-form-input ${this.state.showCross[
+                          field.key
+                        ] && "pk-step-form-error"}`}
+                        name={field.key}
+                        value={this.state.fields[field.key]}
+                        onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}
+                        type="text"
+                        placeholder={field.placeholder}
+                      />
+                      {["patient_name", "patientName"].includes(field.key) &&
+                        this.state.showCross[field.key] && (
+                          <div style={{ marginTop: "-7px" }}>
+                            <small style={{ color: "red" }}>
+                              Enter full name
+                            </small>
+                          </div>
+                        )}
+                    </div>
+                  ) : field.type === "dob" ? (
+                    <div className="pk-step-form-date-container">
+                      <input
+                        autoComplete={false}
+                        autoFocus={true}
+                        className={`pk-step-form-input pk-step-form-date ${this
+                          .state.showCross[field.key] && "pk-step-form-error"}`}
+                        name={field.key}
+                        value={this.state.custom.dob.date}
+                        onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}
+                        type="text"
+                        placeholder={"DD"}
+                      />{" "}
+                      <span className="pk-step-form-date-seperator">/</span>
+                      <input
+                        autoComplete={false}
+                        className={`pk-step-form-input pk-step-form-date ${this
+                          .state.showCross[field.key] && "pk-step-form-error"}`}
+                        name={field.key}
+                        value={this.state.custom.dob.month}
+                        onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}
+                        type="text"
+                        placeholder={"MM"}
+                      />{" "}
+                      <span className="pk-step-form-date-seperator">/</span>
+                      <input
+                        autoComplete={false}
+                        className={`pk-step-form-input pk-step-form-date ${this
+                          .state.showCross[field.key] && "pk-step-form-error"}`}
+                        name={field.key}
+                        value={this.state.custom.dob.year}
+                        onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}
+                        type="text"
+                        placeholder={"YYYY"}
+                      />{" "}
+                      <span className="pk-step-form-date-seperator" />
+                    </div>
+                  ) : field.type === "contact_num" ? (
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        paddingTop: "5px",
+                      }}
+                      className="pk-step-form-input"
+                    >
+                      {/* <div
                        className={`pk-step-form-input pk-step-form-select ${this
                         .state.showCross[field.key] && "pk-step-form-error"}`}
                         style={{width: "75px"}}
@@ -575,7 +572,7 @@ class StepForm extends Component {
                     </SelectField>
                     </div> */}
 
-                    {/* <div>
+                      {/* <div>
                     <Select
                       styles={{
                         singleValue: base => ({
@@ -608,39 +605,39 @@ class StepForm extends Component {
                     />
                     </div> */}
 
-                    <div className="pk-phone-number-input">
-                      <PhoneInput
-                        autoFocus={field.country ? true : false}
-                        placeholder="Enter phone number"
-                        value={this.state.fields[field.key]}
-                        name={field.key}
-                        country={field.country}
-                        onKeyPress={this.handleKeyPress}
-                        onChange={value => {
-                          this.setState(
-                            {
-                              ...this.state,
-                              fields: {
-                                ...this.state.fields,
-                                [field.key]: value,
+                      <div className="pk-phone-number-input">
+                        <PhoneInput
+                          autoFocus={field.country ? true : false}
+                          placeholder="Enter phone number"
+                          value={this.state.fields[field.key]}
+                          name={field.key}
+                          country={field.country}
+                          onKeyPress={this.handleKeyPress}
+                          onChange={value => {
+                            this.setState(
+                              {
+                                ...this.state,
+                                fields: {
+                                  ...this.state.fields,
+                                  [field.key]: value,
+                                },
                               },
-                            },
-                            () => {
-                              this.validateForm();
-                            },
-                          );
-                        }}
-                        onKeyDown={e => {
-                          if (e.keyCode == 13) {
-                            console.log("enter");
+                              () => {
+                                this.validateForm();
+                              },
+                            );
+                          }}
+                          onKeyDown={e => {
+                            if (e.keyCode == 13) {
+                              console.log("enter");
 
-                            this.handleClick(e.target.name);
-                          }
-                        }}
-                      />
-                    </div>
+                              this.handleClick(e.target.name);
+                            }
+                          }}
+                        />
+                      </div>
 
-                    {/* <div
+                      {/* <div
                     style={{
                       width: '100%'
                     }}
@@ -662,8 +659,8 @@ class StepForm extends Component {
                       placeholder={field.placeholder}
                     />
                     </div> */}
-                    <style>
-                      {`.css-1rtrksz{ 
+                      <style>
+                        {`.css-1rtrksz{ 
                             height: 40px; 
                           } 
                           .css-1aya2g8,
@@ -678,165 +675,166 @@ class StepForm extends Component {
                           .css-11unzgr{
                             max-height: 200px;
                           }`}
-                    </style>
-                  </div>
-                ) : field.type === "longtext" ? (
-                  <textarea
-                    autoFocus={true}
-                    className={`pk-step-form-input pk-step-form-textarea ${this
-                      .state.showCross[field.key] && "pk-step-form-error"}`}
-                    name={field.key}
-                    value={this.state.fields[field.key]}
-                    onChange={this.handleChange}
-                    onKeyPress={this.handleKeyPress}
-                    type="text"
-                    placeholder={field.placeholder}
-                  />
-                ) : field.type === "dropdown" ? (
-                  <div
-                    className={`pk-step-form-input pk-step-form-select ${this
-                      .state.showCross[field.key] && "pk-step-form-error"}`}
-                  >
-                    <SelectField
-                      multiple={
-                        !!field.multiple &&
-                        field.multiple.toLowerCase() === "true"
-                          ? true
-                          : false
-                      }
-                      hintText={field.placeholder}
+                      </style>
+                    </div>
+                  ) : field.type === "longtext" ? (
+                    <textarea
+                      autoFocus={true}
+                      className={`pk-step-form-input pk-step-form-textarea ${this
+                        .state.showCross[field.key] && "pk-step-form-error"}`}
+                      name={field.key}
                       value={this.state.fields[field.key]}
-                      style={{
-                        fontFamily: "'Muli', sans-serif",
-                        height: 37,
-                        boxShadow: "0 0 1px 1px rgba(0, 0, 0, 0,3)",
-                      }}
-                      menuStyle={{
-                        zIndex: 20004444444444444444444444,
-                        transform: "translateY(-14px)",
-                      }}
-                      maxHeight={250}
-                      onChange={(e, i, val) => {
-                        this.setState(
-                          {
-                            fields: {
-                              ...this.state.fields,
-                              [field.key]: val,
-                            },
-                          },
-                          () => {
-                            this.handleClick(field.key);
-                          },
-                        );
-                      }}
+                      onChange={this.handleChange}
+                      onKeyPress={this.handleKeyPress}
+                      type="text"
+                      placeholder={field.placeholder}
+                    />
+                  ) : field.type === "dropdown" ? (
+                    <div
+                      className={`pk-step-form-input pk-step-form-select ${this
+                        .state.showCross[field.key] && "pk-step-form-error"}`}
                     >
-                      {field.options.map((val, i) => (
-                        <MenuItem
-                          key={i}
-                          value={val}
-                          primaryText={val}
-                          style={{ fontFamily: "'Muli', sans-serif" }}
-                          checked={
-                            !!field.multiple &&
-                            field.multiple.toLowerCase() === "true" &&
-                            this.state.fields[field.key].indexOf(val) > -1
-                          }
-                        />
-                      ))}
-                    </SelectField>
-                  </div>
-                ) : field.type === "password" ? (
-                  <input
-                    autoFocus={true}
-                    className={`pk-step-form-input ${this.state.showCross[
-                      field.key
-                    ] && "pk-step-form-error"}`}
-                    name={field.key}
-                    value={this.state.fields[field.key]}
-                    onChange={this.handleChange}
-                    onKeyPress={this.handleKeyPress}
-                    type="password"
-                    placeholder={field.placeholder}
-                  />
-                ) : (
-                  <input
-                    autoFocus={true}
-                    className={`pk-step-form-input ${this.state.showCross[
-                      field.key
-                    ] && "pk-step-form-error"}`}
-                    name={field.key}
-                    value={this.state.fields[field.key]}
-                    onChange={this.handleChange}
-                    onKeyPress={this.handleKeyPress}
-                    type={field.type}
-                    placeholder={field.placeholder}
-                  />
-                )}
-                {
-                  <button
-                    className={`pk-step-form-button ${field.type ===
-                      "longtext" && "pk-step-form-textarea-button"} ${
-                      this.state.showCross[field.key]
-                        ? "pk-step-form-cross"
-                        : this.state.done[field.key]
-                        ? "pk-step-form-check"
-                        : "pk-step-form-chevron"
-                    }`}
-                    style={{
-                      ...(this.state.showCross[field.key]
-                        ? { backgroundColor: "#DC4340" }
-                        : this.state.done[field.key]
-                        ? { backgroundColor: "#4EC794" }
-                        : {
-                            backgroundColor: this.props.primaryColor,
-                            cursor: "pointer",
-                          }),
-                    }}
-                    onClick={
-                      this.state.done[field.key]
-                        ? this.state.tac
-                          ? this.state.done[field.key]
-                            ? () => {}
+                      <SelectField
+                        multiple={
+                          !!field.multiple &&
+                          field.multiple.toLowerCase() === "true"
+                            ? true
+                            : false
+                        }
+                        hintText={field.placeholder}
+                        value={this.state.fields[field.key]}
+                        style={{
+                          fontFamily: "'Muli', sans-serif",
+                          height: 37,
+                          boxShadow: "0 0 1px 1px rgba(0, 0, 0, 0,3)",
+                        }}
+                        menuStyle={{
+                          zIndex: 20004444444444444444444444,
+                          transform: "translateY(-14px)",
+                        }}
+                        maxHeight={250}
+                        onChange={(e, i, val) => {
+                          this.setState(
+                            {
+                              fields: {
+                                ...this.state.fields,
+                                [field.key]: val,
+                              },
+                            },
+                            () => {
+                              this.handleClick(field.key);
+                            },
+                          );
+                        }}
+                      >
+                        {field.options.map((val, i) => (
+                          <MenuItem
+                            key={i}
+                            value={val}
+                            primaryText={val}
+                            style={{ fontFamily: "'Muli', sans-serif" }}
+                            checked={
+                              !!field.multiple &&
+                              field.multiple.toLowerCase() === "true" &&
+                              this.state.fields[field.key].indexOf(val) > -1
+                            }
+                          />
+                        ))}
+                      </SelectField>
+                    </div>
+                  ) : field.type === "password" ? (
+                    <input
+                      autoFocus={true}
+                      className={`pk-step-form-input ${this.state.showCross[
+                        field.key
+                      ] && "pk-step-form-error"}`}
+                      name={field.key}
+                      value={this.state.fields[field.key]}
+                      onChange={this.handleChange}
+                      onKeyPress={this.handleKeyPress}
+                      type="password"
+                      placeholder={field.placeholder}
+                    />
+                  ) : (
+                    <input
+                      autoFocus={true}
+                      className={`pk-step-form-input ${this.state.showCross[
+                        field.key
+                      ] && "pk-step-form-error"}`}
+                      name={field.key}
+                      value={this.state.fields[field.key]}
+                      onChange={this.handleChange}
+                      onKeyPress={this.handleKeyPress}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                    />
+                  )}
+                  {
+                    <button
+                      className={`pk-step-form-button ${field.type ===
+                        "longtext" && "pk-step-form-textarea-button"} ${
+                        this.state.showCross[field.key]
+                          ? "pk-step-form-cross"
+                          : this.state.done[field.key]
+                          ? "pk-step-form-check"
+                          : "pk-step-form-chevron"
+                      }`}
+                      style={{
+                        ...(this.state.showCross[field.key]
+                          ? { backgroundColor: "#DC4340" }
+                          : this.state.done[field.key]
+                          ? { backgroundColor: "#4EC794" }
+                          : {
+                              backgroundColor: this.props.primaryColor,
+                              cursor: "pointer",
+                            }),
+                      }}
+                      onClick={
+                        this.state.done[field.key]
+                          ? this.state.tac
+                            ? this.state.done[field.key]
+                              ? () => {}
+                              : () => {
+                                  this.handleClick(field.key);
+                                }
                             : () => {
-                                this.handleClick(field.key);
+                                this.setErrorMessage(
+                                  "Please agree terms and condition",
+                                );
                               }
                           : () => {
-                              this.setErrorMessage(
-                                "Please agree terms and condition",
-                              );
+                              this.handleClick(field.key);
                             }
-                        : () => {
-                            this.handleClick(field.key);
-                          }
-                    }
-                  >
-                    <div className="pk-step-form-button-bar" />
-                    <div className="pk-step-form-button-bar" />
-                  </button>
-                }
-              </div>
-              {field.type === "dob" && field.tnc && (
-                <div style={{ display: "flex" }}>
-                  <input
-                    id="tac"
-                    name="tac"
-                    type="checkbox"
-                    checked={this.state.tac}
-                    onClick={this.changeTac}
-                  />
-                  <label htmlFor="tac">
-                    I Agree{" "}
-                    <span
-                      className="hyperlink"
-                      onClick={_ => this.props.openWebview(field.tnc)}
+                      }
                     >
-                      terms and condition
-                    </span>
-                  </label>
+                      <div className="pk-step-form-button-bar" />
+                      <div className="pk-step-form-button-bar" />
+                    </button>
+                  }
                 </div>
-              )}
-            </Fragment>
-          ))}
+                {field.type === "dob" && field.tnc && (
+                  <div style={{ display: "flex" }}>
+                    <input
+                      id="tac"
+                      name="tac"
+                      type="checkbox"
+                      checked={this.state.tac}
+                      onClick={this.changeTac}
+                    />
+                    <label htmlFor="tac">
+                      I Agree{" "}
+                      <span
+                        className="hyperlink"
+                        onClick={_ => this.props.openWebview(field.tnc)}
+                      >
+                        terms and condition
+                      </span>
+                    </label>
+                  </div>
+                )}
+              </Fragment>
+            ),
+          )}
         </div>
       </div>
     );
